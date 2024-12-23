@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Requests\PropertyRequest;
 
 class Property extends Model
 {
@@ -47,5 +49,21 @@ class Property extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    // Validator Function
+    public static function validator(PropertyRequest $request)
+    {
+        return $request->validated();
+    }
+
+    public static function getView($action)
+    {
+        return "admin.properties.$action";
+    }
+
+    public static function getRedirect($action)
+    {
+        return "admin.properties.$action";
     }
 }

@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\Admin\PropertyController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ss', function(){
-    return "something";
+Route::prefix('admin')->group(function () {
+    Route::resource('properties', PropertyController::class);
 });
-Route::resource('properties', PropertyController::class);
+
+Route::prefix('/')->group(function () {
+});

@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class crud extends Controller
+class CrudController extends Controller
 {
     public $model;
 
     public function index()
     {
-        $properties = $this->model::all();
-        return view('properties.index', compact('properties'));
+        $data = $this->model::all();
+        return view($this->model::getView('index'), compact('data'));
     }
 
     public function create()
@@ -23,19 +23,19 @@ class crud extends Controller
     {
         $validated = $request->validate($this->model::validator());
         $this->model::create($validated);
-        // return redirect()->route('properties.index')->with('success', 'Property created successfully.');
+        return redirect()->route($this->model::getRedirect('index'))->with('success', $this->model.' created successfully.');
     }
 
     public function show($id)
     {
-        $property = $this->model::findOrFail($id);
-        return view('properties.show', compact('property'));
+        $data = $this->model::findOrFail($id);
+        return view($this->model::getView('show'), compact('data'));
     }
 
     public function edit($id)
     {
-        $property = $this->model::findOrFail($id);
-        return view('properties.edit', compact('property'));
+        $data = $this->model::findOrFail($id);
+        return view($this->model::getView('edit'), compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -43,13 +43,13 @@ class crud extends Controller
         $validated = $request->validate($this->model::validator());
         $property = $this->model::findOrFail($id);
         $property->update($validated);
-        return redirect()->route('properties.index')->with('success', 'Property updated successfully.');
+        return redirect()->route($this->model::getRedirect('index'))->with('success', $this->model.' updated successfully.');
     }
 
     public function destroy($id)
     {
         $property = $this->model::findOrFail($id);
         $property->delete();
-        return redirect()->route('properties.index')->with('success', 'Property deleted successfully.');
+        return redirect()->route($this->model::getRedirect('index'))->with('success', $this->model.' deleted successfully.');
     }
 }
