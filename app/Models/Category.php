@@ -14,6 +14,24 @@ class Category extends Model
 
     public function properties()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->hasMany(Property::class);
+    }
+
+    public static function validator()
+    {
+        return [
+            'name' => 'required|string|max:255',           
+        ];
+    }
+
+    
+    public static function getView($action)
+    {
+        return "admin.categories.$action";
+    }
+
+    public static function getRedirect($action)
+    {
+        return "categories.$action";
     }
 }

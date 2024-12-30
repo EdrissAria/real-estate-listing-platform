@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
 use App\Models\Property;
+use App\Http\Controllers\CrudController;
 
 class PropertyController extends CrudController
 {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PropertyRequest;
 use Illuminate\Http\Request;
 
 class CrudController extends Controller
@@ -23,7 +24,9 @@ class CrudController extends Controller
     {
         $validated = $request->validate($this->model::validator());
         $this->model::create($validated);
-        return redirect()->route($this->model::getRedirect('index'))->with('success', $this->model.' created successfully.');
+
+        return redirect()->route($this->model::getRedirect('index'))
+            ->with('success', 'Record has been added successfully.');
     }
 
     public function show($id)

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Requests\PropertyRequest;
 
 class Property extends Model
 {
@@ -12,6 +11,7 @@ class Property extends Model
 
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'description',
         'price',
@@ -38,7 +38,7 @@ class Property extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function tags()
@@ -51,10 +51,23 @@ class Property extends Model
         return $this->hasMany(Review::class);
     }
 
-    // Validator Function
-    public static function validator(PropertyRequest $request)
+    public static function validator()
     {
-        return $request->validated();
+        return [
+            'category_id' => 'required|number',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
+            'state' => 'required|string|max:100',
+            'country' => 'required|string|max:100',
+            'zip_code' => 'nullable|string|max:20',
+            'type' => 'required|in:rent,sale',
+            'bedrooms' => 'required|integer|min:0',
+            'bathrooms' => 'required|integer|min:0',
+            'area' => 'required|numeric|min:0',
+        ];
     }
 
     public static function getView($action)
@@ -64,6 +77,6 @@ class Property extends Model
 
     public static function getRedirect($action)
     {
-        return "admin.properties.$action";
+        return "properties.$action";
     }
 }
