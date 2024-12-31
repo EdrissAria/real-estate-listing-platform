@@ -15,13 +15,13 @@
                 <nav>
                     <ul>
                         <li class="mb-2">
-                            <a href="/admin/users" class="block py-2 px-4 rounded hover:bg-gray-700">Users</a>
+                            <a href="/users" class="block py-2 px-4 rounded hover:bg-gray-700">Users</a>
                         </li>
                         <li class="mb-2">
-                            <a href="/admin/properties" class="block py-2 px-4 rounded hover:bg-gray-700">Properties</a>
+                            <a href="{{ route('properties.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Properties</a>
                         </li>
                         <li class="mb-2">
-                            <a href="/admin/categories" class="block py-2 px-4 rounded hover:bg-gray-700">Categories</a>
+                            <a href="{{ route('categories.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Categories</a>
                         </li>
                         <li class="mb-2">
                             <a href="tags" class="block py-2 px-4 rounded hover:bg-gray-700">Tags</a>

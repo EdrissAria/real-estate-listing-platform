@@ -17,7 +17,7 @@ class CrudController extends Controller
 
     public function create()
     {
-        return view($this->model::getView('create'));
+        return view($this->model::getView('create'), ['extra_data' => $this->model::getExtras()]);
     }
 
     public function store(Request $request)

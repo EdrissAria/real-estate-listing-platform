@@ -26,6 +26,7 @@ class Property extends Model
         'area',
     ];
 
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -51,10 +52,15 @@ class Property extends Model
         return $this->hasMany(Review::class);
     }
 
+    public static function getExtras()
+    {
+        return \App\Models\Category::all();
+    }
+
     public static function validator()
     {
         return [
-            'category_id' => 'required|number',
+            'category_id' => 'required|numeric',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',

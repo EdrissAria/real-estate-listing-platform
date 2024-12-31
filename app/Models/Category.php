@@ -12,6 +12,11 @@ class Category extends Model
         'name',
     ];
 
+    public static function getExtras()
+    {
+        return [];
+    }
+
     public function properties()
     {
         return $this->hasMany(Property::class);

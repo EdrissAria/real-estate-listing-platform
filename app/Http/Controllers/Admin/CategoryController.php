@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\CrudController;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends CrudController
 {
-    // protected $model;
 
     public function __construct()
     {
-        // parent::__construct();
-
         $this->model = Category::class;
     }   
 }
