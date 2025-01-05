@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\Models\Favorite;
-use Illuminate\Http\Request;
 
-class FavoriteController extends CrudController
+class FavoriteController extends Controller
 {
-    // protected $model;
-
-    public function __construct()
+    public function index()
     {
-        // parent::__construct();
+        $favorites = Favorite::with('user', 'property')->paginate(10);
+        return view('admin.favorites.index', compact('favorites'));
+    }
 
-        $this->model = Favorite::class;
-    }   
+    public function destroy($id)
+    {
+        $favorite = Favorite::findOrFail($id);
+        $favorite->delete();
+        return redirect()->back()->with('success', 'Favorite removed successfully.');
+    }
 }
